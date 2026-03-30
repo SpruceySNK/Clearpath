@@ -116,7 +116,7 @@ Terraform manages all Cloudflare resources. Each environment (`dev`, `staging`, 
 - Service bindings between Workers
 - Environment variables (including `AUTONOMY_LEVEL`)
 
-**Terraform provider:** `cloudflare/cloudflare ~> 4.x` (pinned to v4 for stability — v5 still stabilising as of early 2026)
+**Terraform provider:** `cloudflare/cloudflare ~> 5.0`
 
 ---
 
