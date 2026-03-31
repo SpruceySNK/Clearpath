@@ -1,0 +1,19 @@
+name = "actions-worker"
+main = "dist/index.js"
+compatibility_date = "2025-03-15"
+
+# --------------------------------------------------------------------------
+# D1 Database Binding
+# --------------------------------------------------------------------------
+# The actual database_id is injected by Terraform per environment.
+# The placeholder below is for local wrangler dev only.
+[[d1_databases]]
+binding = "AUDIT_DB"
+database_name = "clearpath-audit-dev"
+database_id = "placeholder-set-by-terraform"
+
+# --------------------------------------------------------------------------
+# Environment Variables
+# --------------------------------------------------------------------------
+[vars]
+AUTONOMY_LEVEL = "3"

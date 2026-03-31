@@ -1,0 +1,17 @@
+{
+  "name": "vectorize-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ClearPath vectorize-worker — chunks, embeds, and upserts asset content to Cloudflare Vectorize",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "dev": "wrangler dev",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250320.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.0",
+    "wrangler": "^3.114.0"
+  }
+}

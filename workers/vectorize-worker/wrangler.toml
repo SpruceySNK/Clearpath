@@ -1,0 +1,50 @@
+# --------------------------------------------------------------------------
+# wrangler.toml — local dev reference only.
+# Production infrastructure is managed by Terraform.
+# --------------------------------------------------------------------------
+
+name = "vectorize-worker"
+main = "dist/index.js"
+compatibility_date = "2025-03-01"
+
+# --------------------------------------------------------------------------
+# Queue consumer — this worker is triggered by messages on ingest-queue.
+# --------------------------------------------------------------------------
+
+[[queues.consumers]]
+queue = "clearpath-ingest-queue-dev"
+max_batch_size = 10
+max_batch_timeout = 30         # seconds — wait up to 30 s to fill the batch
+max_retries = 3
+dead_letter_queue = "clearpath-ingest-dlq-dev"
+
+# --------------------------------------------------------------------------
+# Queue producer — publish to analysis-queue after vectorization.
+# --------------------------------------------------------------------------
+
+[[queues.producers]]
+binding = "ANALYSIS_QUEUE"
+queue = "clearpath-analysis-queue-dev"
+
+# --------------------------------------------------------------------------
+# R2 bucket binding
+# --------------------------------------------------------------------------
+
+[[r2_buckets]]
+binding = "ASSET_BUCKET"
+bucket_name = "clearpath-assets-dev"
+
+# --------------------------------------------------------------------------
+# Vectorize index binding
+# --------------------------------------------------------------------------
+
+[[vectorize]]
+binding = "VECTORIZE_INDEX"
+index_name = "clearpath-vectors-dev"
+
+# --------------------------------------------------------------------------
+# Workers AI binding
+# --------------------------------------------------------------------------
+
+[ai]
+binding = "AI"

@@ -1,0 +1,17 @@
+{
+  "name": "rag-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ClearPath RAG worker — embeds queries and performs semantic search against Vectorize.",
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241230.0",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.0",
+    "wrangler": "^3.99.0"
+  }
+}

@@ -1,0 +1,18 @@
+# -------------------------------------------------------------------------
+# search-worker — wrangler configuration
+#
+# NOTE: This file exists for local development and `wrangler dev` only.
+# Production deployments are managed entirely by Terraform which sets all
+# bindings, environment variables, and routes.
+# -------------------------------------------------------------------------
+
+name = "search-worker"
+main = "dist/index.js"
+compatibility_date = "2024-12-30"
+
+# ---------------------------------------------------------------------------
+# Environment Variables (local dev only — Terraform manages production)
+# ---------------------------------------------------------------------------
+
+[vars]
+SEARCH_API_KEY = "dev-placeholder-key"

@@ -1,0 +1,24 @@
+# -------------------------------------------------------------------------
+# rag-worker — wrangler configuration
+#
+# NOTE: This file exists for local development and `wrangler dev` only.
+# Production deployments are managed entirely by Terraform which sets all
+# bindings, environment variables, and routes.
+# -------------------------------------------------------------------------
+
+name = "rag-worker"
+main = "dist/index.js"
+compatibility_date = "2024-12-30"
+
+# ---------------------------------------------------------------------------
+# Bindings (local dev only — Terraform manages production bindings)
+# ---------------------------------------------------------------------------
+
+# Workers AI
+[ai]
+binding = "AI"
+
+# Vectorize
+[[vectorize]]
+binding = "VECTORIZE_INDEX"
+index_name = "clearpath-vectors-dev"

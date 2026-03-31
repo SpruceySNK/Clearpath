@@ -1,0 +1,64 @@
+# ---------------------------------------------------------------------------
+# ClearPath — Orchestrator Worker
+# ---------------------------------------------------------------------------
+# Agentic AI decision pipeline for asset compliance analysis.
+# Consumes from the analysis queue and exposes POST /analyse/:id.
+# ---------------------------------------------------------------------------
+
+name = "orchestrator-worker"
+main = "dist/index.js"
+compatibility_date = "2024-12-18"
+compatibility_flags = ["nodejs_compat"]
+
+# ---------------------------------------------------------------------------
+# Environment variables
+# ---------------------------------------------------------------------------
+[vars]
+AUTONOMY_LEVEL = "3"
+
+# ---------------------------------------------------------------------------
+# R2 bucket binding
+# ---------------------------------------------------------------------------
+[[r2_buckets]]
+binding = "ASSET_BUCKET"
+bucket_name = "clearpath-assets-dev"
+
+# ---------------------------------------------------------------------------
+# Queue consumer — receives messages from vectorize-worker
+# ---------------------------------------------------------------------------
+[[queues.consumers]]
+queue = "clearpath-analysis-queue-dev"
+max_batch_size = 5
+max_batch_timeout = 30
+max_retries = 3
+dead_letter_queue = "clearpath-analysis-dlq-dev"
+
+# ---------------------------------------------------------------------------
+# Queue producer — for sending notifications (autonomy level 4)
+# ---------------------------------------------------------------------------
+[[queues.producers]]
+queue = "clearpath-analysis-queue-dev"
+binding = "ANALYSIS_QUEUE"
+
+# ---------------------------------------------------------------------------
+# Service bindings
+# ---------------------------------------------------------------------------
+[[services]]
+binding = "RAG_SERVICE"
+service = "rag-worker"
+
+[[services]]
+binding = "ACTIONS_SERVICE"
+service = "actions-worker"
+
+# ---------------------------------------------------------------------------
+# Workers AI binding
+# ---------------------------------------------------------------------------
+[ai]
+binding = "AI"
+
+# ---------------------------------------------------------------------------
+# AI Gateway (set via Terraform per environment)
+# ---------------------------------------------------------------------------
+# AI_GATEWAY_ID is injected as a variable by Terraform.
+# See infra/modules/workers/ for the resource definition.
