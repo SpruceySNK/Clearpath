@@ -1,0 +1,29 @@
+{
+  "name": "@clearpath/cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ClearPath CLI client",
+  "type": "module",
+  "bin": {
+    "clearpath": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "start": "tsx src/index.ts",
+    "clearpath": "tsx src/index.ts",
+    "ingest": "tsx src/index.ts ingest",
+    "analyse": "tsx src/index.ts analyse",
+    "audit": "tsx src/index.ts audit",
+    "health": "tsx src/index.ts health",
+    "repl": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "tsx": "^4.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.0"
+  }
+}
