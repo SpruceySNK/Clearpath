@@ -1,0 +1,21 @@
+{
+  "name": "clearpath",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Serverless agentic asset decision pipeline",
+  "workspaces": [
+    "workers/*",
+    "cli"
+  ],
+  "scripts": {
+    "build": "npm run build:workers && npm run build:cli",
+    "build:workers": "bash scripts/build-workers.sh",
+    "build:cli": "npm run build --workspace=cli",
+    "deploy": "bash scripts/deploy.sh",
+    "cli": "npm run clearpath --workspace=cli --",
+    "dev": "echo 'Use wrangler dev in individual worker directories for local development'"
+  },
+  "dependencies": {
+    "terraform": "^1.23.1"
+  }
+}
